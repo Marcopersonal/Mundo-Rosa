@@ -124,6 +124,8 @@ position:relative;
 cursor:pointer;
 border-radius:0 0 15px 15px;
 box-shadow:0 10px 20px rgba(0,0,0,.2);
+overflow:visible;
+transition:all .6s ease;
 }
 
 .flap{
@@ -161,7 +163,8 @@ transform:rotateX(180deg);
 }
 
 .envelope.open .letter{
-transform:translateY(-220px);
+transform:translateY(-260px);
+z-index:10;
 }
 
 .friend{
