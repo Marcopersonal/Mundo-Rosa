@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário Daniela</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#ff4f95,#ff77b6,#ff9dd1);
+overflow-x:hidden;
+color:white;
+text-align:center;
+}
+
+section{
+min-height:100vh;
+padding:40px 20px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:4rem;
+margin-bottom:20px;
+text-shadow:0 0 20px white;
+}
+
+.polaroid{
+background:white;
+padding:15px;
+border-radius:15px;
+transform:rotate(-3deg);
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+margin-bottom:30px;
+}
+
+.polaroid img{
+width:280px;
+border-radius:10px;
+}
+
+.polaroid p{
+color:#ff3f8f;
+font-weight:600;
+margin-top:10px;
+}
+
+.subtitle{
+max-width:800px;
+line-height:1.8;
+margin-bottom:30px;
+}
+
+button{
+padding:15px 30px;
+border:none;
+border-radius:50px;
+background:#ff2d82;
+color:white;
+cursor:pointer;
+margin:10px;
+font-size:1rem;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#balloons{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.balloon{
+position:absolute;
+bottom:-100px;
+font-size:30px;
+animation:rise 10s linear forwards;
+}
+
+@keyframes rise{
+from{
+transform:translateY(0);
+opacity:1;
+}
+to{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+#fireworks{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.envelope{
+margin-top:120px;
+width:280px;
+height:180px;
+background:#ff6fad;
+position:relative;
+cursor:pointer;
+border-radius:0 0 15px 15px;
+overflow:visible;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+.flap{
+position:absolute;
+top:0;
+left:0;
+width:0;
+height:0;
+border-left:140px solid transparent;
+border-right:140px solid transparent;
+border-top:90px solid #ff4f95;
+transform-origin:top;
+transition:1s;
+z-index:3;
+}
+
+.letter{
+position:absolute;
+width:240px;
+background:white;
+color:#444;
+padding:20px;
+border-radius:10px;
+left:20px;
+top:140px;
+transition:1s ease;
+z-index:1;
+max-height:280px;
+overflow-y:auto;
+-webkit-overflow-scrolling:touch;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+transform:translateY(-260px);
+z-index:10;
+}
+
+.friend{
+color:#ff3d8d;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.hidden{
+display:none;
+}
+</style>
+</head>
+<body>
+
+<div id="balloons"></div>
+<canvas id="fireworks"></canvas>
+
+<section>
+
+<div class="polaroid">
+<img src="foto-daniela.jpg">
+<p>Você ilumina tudo ao seu redor 💖</p>
+</div>
+
+<h1>Feliz Aniversário Daniela!</h1>
+
+<div class="subtitle">
+Hoje celebramos uma mulher rara.<br><br>
+Uma alma leve, cheia de alegria, que transforma qualquer lugar com seu sorriso.<br><br>
+Ama o rosa, ama a vida, acredita no amor e espalha paz por onde passa.<br><br>
+Professora dedicada, apaixonada pela educação física, forte no corpo e pura na alma.<br><br>
+Que seu novo ciclo seja tão lindo quanto sua essência.
+</div>
+
+<button onclick="playMusic()">🎵 Ouvir a música dos amigos</button>
+
+<button onclick="document.getElementById('cartas').scrollIntoView({behavior:'smooth'})">
+💌 Abrir cartas especiais
+</button>
+
+</section>
+
+<section id="cartas">
+<h1>Mensagens para você</h1>
+
+<div class="envelope" onclick="toggleLetter()">
+<div class="flap"></div>
+<div class="letter" id="letterText"></div>
+</div>
+
+<button onclick="nextLetter()">Próxima carta ➜</button>
+
+</section>
+
+<audio id="music">
+<source src="always-bon-jovi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const cartas = [
+{
+nome:"ASHILLEY",
+texto:`Dani patati, eu queria que você soubesse o quanto você é especial pra mim. Sua amizade faz diferença nos meus dias, seja nas risadas, nas conversas ou até mesmo chamando minha atenção. Você é uma pessoa incrível, com um coração lindo, e eu tenho muita sorte de ter você na minha vida. Espero que você nunca esqueça o quanto é importante, amada e admirada. Obrigada por ser minha amiga, por compartilhar um pouco da vida comigo, por me fazer sentir especial em uma amizade. Eu amo você, Dani 🤍`
+},
+{
+nome:"JOSI",
+texto:`Feliz aniversário, Dany! 🎉💚 Hoje é um dia muito especial, e eu quero te desejar muita saúde, paz, felicidade e muitas bênçãos de Deus na sua vida. Você é uma pessoa incrível, e sua felicidade encanta todos nós e alegra os nossos dias. Antes mesmo do trabalho, já existia nossa amizade, e eu tenho muito carinho por você e pela sua história. Que Deus continue cuidando de cada detalhe da sua vida, realizando seus sonhos e abençoando você e sua família sempre 🙌✨ Aproveite muito o seu dia. Amo a sua vida! 💕🎂🥳`
+},
+{
+nome:"DIANA",
+texto:`Dani hoje é dia de celebrar sua vida. Feliz aniversário. Que Jesus abençoe ricamente sua vida e que os sonhos do teu coração concretizem. Felicidades 👏🏻👏🏻💙`
+},
+{
+nome:"LETICIA",
+texto:`Happy Daniela’s day! Te desejo muito sucesso nesse novo ciclo que se inicia, que você alcance e realize todos os seus sonhos! Que você continue essa pessoa incrível e iluminada… Sou muito grata por ter conhecido você!!! ❤️ Beijos da Let’s go.`
+},
+{
+nome:"CRISTIANO",
+texto:`Parabéns Dani (Bolina), que a alegria contagie todos ao seu redor! Feliz dia e vida... Muita saúde, paz e prosperidade 🙏🏻`
+},
+{
+nome:"ELIZETE",
+texto:`Hoje você comemora mais um ano e é o momento ideal de lembrar que a jornada é tão importante quanto o destino. Que cada dia seja uma aventura e cada desafio uma oportunidade. Que seu dia de aniversário seja tão especial quanto você é. Que a alegria que você espalha retorne em dobro. Parabéns e feliz aniversário. Que o Espírito Santo de Deus te cubra de bênçãos ❤️`
+},
+{
+nome:"MARCO",
+texto:`Hoje é dia de celebrar alguém especial ✨ Parabéns, Daniela! Nunca perca esse seu jeito simples, alegre e cheio de luz. Você tem uma energia de criança feliz que contagia todo mundo ao redor. Que sua vida seja repleta de saúde, amor, paz e muitos motivos para sorrir. Você merece o melhor sempre! 🎉💖`
+},
+{
+nome:"BIANCA",
+texto:`Dani queria agradecer por essa pessoa maravilhosa que você é, carismática, educada, engraçada, alto astral. Continue assim e não deixe ninguém apagar seu brilho. Deus abençoe mais um ano de vida e ilumine seus caminhos com paz, alegria, saúde e dinheiro. Amo você ❤️`
+},
+{
+nome:"ANA",
+texto:`Feliz aniversáriooo danizinha! Quero te desejar um novo ciclo cheio de coisas boas, felicidade, saúde e muitas conquistas! Admiro muito seu jeito e fico feliz de ter conhecido alguém tão incrível. Desejo que nunca te falte motivos pra sorrir e pessoas que valorizem essa luz que você tem!!`
+},
+{
+nome:"JOSIANE",
+texto:`Parabéns, Daniiiiiii! 💕 Que nunca falte pré-treino, força pra academia e aquele look rosa impecável 😅🎀. Muita saúde, felicidade, amo você. Bjos Josiiii.`
+},
+{
+nome:"GABRIELA",
+texto:`Parabéns pelo seu dia! ✨ Que nunca faltem motivos para sorrir, sonhos para realizar e sucesso em todos os caminhos da sua vida. Além de uma ótima profissional, você é uma pessoa incrível de conviver no dia a dia. Desejo um aniversário maravilhoso e um novo ano cheio de realizações e felicidade! 🎂💐`
+}
+];
+
+let atual=0;
+let aberta=false;
+
+function mostrarCarta(){
+document.getElementById("letterText").innerHTML=
+"<div class='friend'>"+cartas[atual].nome+"</div>"+cartas[atual].texto;
+}
+
+mostrarCarta();
+
+function toggleLetter(){
+const env=document.querySelector(".envelope");
+
+if(!aberta){
+env.classList.add("open");
+aberta=true;
+}else{
+env.classList.remove("open");
+aberta=false;
+}
+}
+
+function nextLetter(){
+atual++;
+if(atual>=cartas.length) atual=0;
+document.querySelector(".envelope").classList.remove("open");
+aberta=false;
+mostrarCarta();
+}
+
+function playMusic(){
+document.getElementById("music").play();
+startBalloons();
+}
+
+function startBalloons(){
+setInterval(()=>{
+const b=document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"%";
+b.style.fontSize=(20+Math.random()*30)+"px";
+document.getElementById("balloons").appendChild(b);
+
+setTimeout(()=>{
+b.remove();
+},10000);
+
+},600);
+}
+
+/* fogos */
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function createFire(){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height/2,
+r:Math.random()*3+1,
+a:1
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle=`rgba(255,255,255,${p.a})`;
+ctx.fill();
+
+p.a-=0.01;
+if(p.a<=0) particles.splice(i,1);
+});
+
+requestAnimationFrame(animate);
+}
+
+setInterval(createFire,100);
+animate();
+
+</script>
+
+</body>
+</html>
